@@ -1,0 +1,179 @@
+<!-- faculty-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    font-family: 'Arial', sans-serif;
+    background-image: url(page9.jpg); /* Replace with your image URL */
+    background-size: cover; /* Makes the background image cover the entire body */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    color: #333;
+    line-height: 1.6;
+}
+
+        h1,
+        h2 {
+            color: #1a535c;
+            margin-bottom: 20px;
+        }
+
+        .container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8); /* Set the opacity to 0.8 for transparency */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Slightly darker shadow for better visibility */
+}
+
+        /* Class List Styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            background-color: #f1f3f4;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #e6e8ea;
+        }
+
+        img {
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        /* Form Styling */
+        form {
+            margin-top: 30px;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            background-color: #f9f9f9;
+            transition: border 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            border-color: #4ecdc4;
+            outline: none;
+        }
+
+        button {
+            background-color: #1a535c;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #4ecdc4;
+        }
+
+        #updateMessage {
+            margin-top: 15px;
+            color: #28a745;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            li {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            img {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Faculty Dashboard</h1>
+
+        <h2>Class List</h2>
+        <div id="classList"></div>
+
+        <h2>Update Student Details</h2>
+        <form id="profileUpdateForm">
+            <input type="text" id="studentName" placeholder="Student Name" required>
+            <input type="email" id="studentEmail" placeholder="Student Email" required>
+            <input type="text" id="studentContact" placeholder="Student Contact" required>
+            <button type="submit">Update</button>
+        </form>
+        <div id="updateMessage"></div>
+    </div>
+
+    <script>
+        const classDatabase = [
+            { name: 'kishore', photo: 'https://via.placeholder.com/50', contact: '+8668141058' },
+            { name: 'siva', photo: 'https://via.placeholder.com/50', contact: '+9994952232' },
+        ];
+
+        function displayClassList() {
+            const classList = document.getElementById('classList');
+            classList.innerHTML = '<ul>' + classDatabase.map(student => `
+                <li>
+                    <img src="${student.photo}" alt="${student.name}">
+                    <div>
+                        <p><strong>${student.name}</strong></p>
+                        <p>Contact: ${student.contact}</p>
+                    </div>
+                </li>
+            `).join('') + '</ul>';
+        }
+
+        document.getElementById('profileUpdateForm').onsubmit = function (event) {
+            event.preventDefault();
+            const studentName = document.getElementById('studentName').value;
+            const studentEmail = document.getElementById('studentEmail').value;
+            const studentContact = document.getElementById('studentContact').value;
+
+            // Redirect to student details page with updated information
+            window.location.href = `student-details.html?name=${encodeURIComponent(studentName)}&email=${encodeURIComponent(studentEmail)}&contact=${encodeURIComponent(studentContact)}`;
+        };
+
+        window.onload = displayClassList;
+    </script>
+</body>
+
+</html>

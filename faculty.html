@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Advisors</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url(page6.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .faculty-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #01060b;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .faculty-list {
+            margin-top: 20px;
+        }
+
+        .faculty-list p {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .faculty-list a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .faculty-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Back Button */
+        .back-button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #d5cb12;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="faculty-container">
+        <h1>Faculty Advisors</h1>
+        <div class="faculty-list" id="facultyList"></div>
+        <button class="back-button" onclick="window.location.href='student-dashboard.html'">Back to Student Dashboard</button>
+    </div>
+
+    <script>
+        const facultyDatabase = [
+            { name: 'Dr. moulee', email: 'sarahb@university.edu', phone: '+8668999999' },
+            { name: 'Prof. danush', email: 'mikeg@university.edu', phone: '+5747474741' },
+        ];
+
+        function displayFacultyAdvisors() {
+            const facultyList = document.getElementById('facultyList');
+            facultyDatabase.forEach(advisor => {
+                facultyList.innerHTML += `
+                    <p>
+                        ${advisor.name} - 
+                        <a href="mailto:${advisor.email}">Email</a> | 
+                        <a href="tel:${advisor.phone}">Call</a>
+                    </p>
+                `;
+            });
+        }
+
+        window.onload = function() {
+            displayFacultyAdvisors();
+        };
+    </script>
+</body>
+
+</html>

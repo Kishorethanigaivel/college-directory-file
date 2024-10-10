@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url(page14.jpg); /* Replace with your image path */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center; /* Centers the background image */
+            background-repeat: no-repeat; /* Prevents the background image from repeating */
+            background-color: #3d79d3ad; /* Fallback color if the image fails to load */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(239, 231, 231, 0.347); /* Semi-transparent white */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly darker shadow for contrast */
+}
+
+        h1, h2 {
+            color: #0d0e0e;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            border-bottom: 2px solid #457b9d;
+            padding-bottom: 10px;
+        }
+
+        /* Form Styling */
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+            background-color: #f9f9f981;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            border-color: #457b9d;
+            outline: none;
+        }
+
+        button {
+            background-color: #25354a;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #457b9d;
+        }
+
+        #manageMessage {
+            margin-top: 15px;
+            color: #28a745;
+        }
+
+        /* Graph Section Styling */
+        #graphs {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f1f3f5;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #6c757d;
+        }
+
+        #graphs p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            select {
+                font-size: 0.9em;
+            }
+
+            button {
+                font-size: 0.9em;
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Administrator Dashboard</h1>
+
+        <h2>Manage Records</h2>
+        <form id="manageForm">
+            <input type="text" id="recordName" placeholder="Name" required>
+            <input type="email" id="recordEmail" placeholder="Email" required>
+            <select id="recordRole" required>
+                <option value="student">Student</option>
+                <option value="faculty">Faculty Member</option>
+            </select>
+            <button type="submit">Add/Update Record</button>
+        </form>
+        <div id="manageMessage"></div>
+
+        <h2 id="color">Graphs and Charts</h2>
+        <button onclick="window.location.href='graphs-charts.html'">View Graphs and Charts</button>
+    </div>
+
+    <script>
+        document.getElementById('manageForm').onsubmit = function (event) {
+            event.preventDefault();
+            const name = document.getElementById('recordName').value;
+            const email = document.getElementById('recordEmail').value;
+            const role = document.getElementById('recordRole').value;
+            // Logic to add/update records in the database goes here
+            document.getElementById('manageMessage').innerText = `${role.charAt(0).toUpperCase() + role.slice(1)} record for ${name} has been added/updated successfully.`;
+            console.log({ name, email, role }); // For demonstration purposes
+        };
+    </script>
+</body>
+
+</html>

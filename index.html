@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karpaga Vinayaga College - Directory Login</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, rgba(165, 194, 217, 0.7), rgba(246, 216, 172, 0.582)), url(page16.jpg);
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Navbar Styles */
+        nav {
+            width: 100%;
+            background-color: #3c91ca;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav h1 {
+            color: rgb(0, 0, 0);
+            font-size: 24px;
+            margin-left: 20px;
+        }
+
+        nav .flags {
+            margin-right: 20px;
+        }
+
+        nav .flags img {
+            width: 35px;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        nav .flags img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Language Selector */
+        nav .language-selector {
+            margin-right: 20px;
+        }
+
+        nav select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: white;
+        }
+
+        /* Add Logo */
+        nav img.logo {
+            height: 50px; /* Adjust the height of the logo as needed */
+            margin-left: 20px; /* Space between the logo and the title */
+        }
+
+        /* Main Container to hold About and Login sections */
+        .main-container {
+            display: flex;
+            justify-content: flex-start; /* Align items to the left */
+            width: 90%;
+            max-width: 1200px;
+            gap: 30px;
+            margin-top: 70px; /* Increase margin-top to push the containers down */
+        }
+
+        /* Left Section: About College */
+        .about-container {
+            width: 50%; /* Increase width to occupy more space on the left */
+            background-color: rgba(255, 255, 255, 0.187); /* Adjust the alpha value for transparency */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Slightly increase shadow for depth */
+            backdrop-filter: blur(10px); /* Optional: Adds a blur effect behind the container */
+        }
+
+        .about-college h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #2980b9;
+            text-align: center;
+        }
+
+        .about-college p {
+            font-size: 18px;
+            color: #000000;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .about-college ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-college ul li {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        /* Right Section: Login Container */
+        .login-container {
+            width: 40%; /* You can adjust this based on your design */
+            margin-top: 20px; /* Add some margin-top to position it lower */
+            background-color: rgba(255, 255, 255, 0.187); /* More transparent white */
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px); /* Adds a blur effect for better aesthetics */
+        }
+
+        /* Header Design */
+        .header {
+            background-color: #2980b9;
+            padding: 15px;
+            border-radius: 12px;
+            color: white;
+            font-size: 26px;
+            margin-bottom: 25px;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Elements */
+        input,
+        select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #2980b9;
+            border-radius: 10px;
+            background-color: #ffffff40;
+            font-size: 16px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            background-color: #fff;
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: rgba(255, 255, 255, 0.537);
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #1abc9c;
+            transform: scale(1.05);
+        }
+
+        /* Error Message */
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Icon */
+        .icon {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 90px;
+            background-color: #2980b9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon img {
+            width: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-container,
+            .login-container {
+                width: 100%;
+            }
+
+            .header {
+                font-size: 20px;
+            }
+
+            nav h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <img src="page18.jpg" alt="College Logo" class="logo"> <!-- Replace with your logo URL -->
+        <h1>Karpaga Vinayaga College of Engineering and Technology</h1>
+        <div class="flags">
+            <img src="https://img.icons8.com/emoji/48/000000/india-emoji.png" alt="India">
+            <img src="https://img.icons8.com/emoji/48/000000/united-states-emoji.png" alt="USA">
+            <img src="https://img.icons8.com/emoji/48/000000/japan-emoji.png" alt="Japan">
+        </div>
+        <div class="language-selector">
+            <select id="language-select" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="ta">தமிழ் (Tamil)</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Main Container to hold both About and Login sections -->
+    <div class="main-container">
+        <!-- Left Section: About College -->
+        <div class="about-container">
+            <div class="about-college">
+                <h2 id="about-title">About Our College</h2>
+                <p id="about-description">
+                    Established in 2001, Karpaga Vinayaga College of Engineering and Technology is one of the premier institutes
+                    in Tamil Nadu, providing quality education and fostering a community of intellectual curiosity and innovation.
+                    Our campus offers a range of undergraduate and postgraduate courses, including:
+                </p>
+                <ul>
+                    <li>Bachelor of Engineering (CSE, ECE, EEE, Civil, Mechanical)</li>
+                    <li>Master of Engineering</li>
+                    <li>Bachelor of Technology</li>
+                    <li>MBA and more...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Section: Login Container -->
+        <div class="login-container">
+            <!-- Icon -->
+            <div class="icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/university.png" alt="College Icon">
+            </div>
+
+            <!-- Login Form -->
+            <div class="login-content">
+                <!-- Header -->
+                <div class="header" id="login-header">College Directory Login</div>
+
+                <!-- Error Message -->
+                <div id="error" class="error"></div>
+
+                <!-- Username Input -->
+                <input type="text" id="username" placeholder="Username" required>
+
+                <!-- Password Input -->
+                <input type="password" id="password" placeholder="Password" required>
+
+                <!-- Role Selector -->
+                <select id="role" required>
+                    <option value="">Select Role</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty Member</option>
+                    <option value="administrator">Administrator</option>
+                </select>
+
+                <!-- Login Button -->
+                <button onclick="handleLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Logic Script -->
+    <script>
+        const usersDatabase = [
+            { username: 'student1', password: '1234', role: 'student' },
+            { username: 'faculty1', password: 'abcd', role: 'faculty' },
+            { username: 'admin', password: 'specialkey', role: 'administrator' }
+        ];
+
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const errorDiv = document.getElementById('error');
+            errorDiv.innerText = ''; // Clear previous errors
+
+            const user = usersDatabase.find(u => u.username === username && u.password === password && u.role === role);
+
+            if (user) {
+                switch (role) {
+                    case 'student':
+                        window.location.href = 'student-dashboard.html'; // Redirect to Student Interface
+                        break;
+                    case 'faculty':
+                        window.location.href = 'faculty-dashboard.html'; // Redirect to Faculty Interface
+                        break;
+                    case 'administrator':
+                        window.location.href = 'administrator-dashboard.html'; // Redirect to Admin Interface
+                        break;
+                }
+            } else {
+                errorDiv.innerText = 'Invalid credentials or role. Please try again.';
+            }
+        }
+
+        function changeLanguage() {
+            const language = document.getElementById('language-select').value;
+            const aboutTitle = document.getElementById('about-title');
+            const aboutDescription = document.getElementById('about-description');
+            const loginHeader = document.getElementById('login-header');
+
+            if (language === 'ta') {
+                aboutTitle.innerText = 'எங்கள் கல்லூரி குறித்து';
+                aboutDescription.innerHTML = `
+                    2001 இல் நிறுவப்பட்டது, கார்பகா விநாயக கல்லூரி மற்றும் தொழில்நுட்பம், 
+                    தரமான கல்வியை வழங்கும் மற்றும் அறிவியல் ஆர்வமும் புதுமை சமூகத்தை ஊக்குவிக்கும் 
+                    தமிழ்நாட்டில் ஒரு முன்னணி நிறுவனங்களில் ஒன்று.
+                    எங்கள் கல்லூரியில் கீழ்காணும் பட்டப்படிப்புகள் உள்ளன:
+                `;
+                aboutDescription.innerHTML += `
+                    <ul>
+                        <li>பி.இ (CSE, ECE, EEE, சிவில், மெக்கானிக்கல்)</li>
+                        <li>மெ Master of Engineering</li>
+                        <li>பி.டெக்</li>
+                        <li>MBA மற்றும் இன்னும்...</li>
+                    </ul>
+                `;
+                loginHeader.innerText = 'கல்லூரி அடிப்படை உள்நுழைவு';
+            } else {
+                aboutTitle.innerText = 'About Our College';
+                aboutDescription.innerHTML = `
+                    Established in 2001, Karpaga Vinayaga College of Engineering and Technology is one of the premier institutes 
+                    in Tamil Nadu, providing quality education and fostering a community of intellectual curiosity and innovation. 
+                    Our campus offers a range of undergraduate and postgraduate courses, including:
+                `;
+               
+                loginHeader.innerText = 'College Directory Login';
+            }
+        }
+    </script>
+</body>
+
+</html>

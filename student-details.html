@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    font-family: 'Arial', sans-serif;
+    background-image: url(page11.jpg); /* Replace with your image URL */
+    background-size: cover; /* Ensures the image covers the entire body */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the last value for opacity (0.0 - fully transparent, 1.0 - fully opaque) */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+        h1 {
+            color: #1a535c;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1a535c;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #4ecdc4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Updated Student Details</h1>
+        <div id="studentDetails"></div>
+        <a href="faculty-dashboard.html" class="back-button">Back to Dashboard</a>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function displayStudentDetails() {
+            const name = getQueryParam('name');
+            const email = getQueryParam('email');
+            const contact = getQueryParam('contact');
+
+            const detailsDiv = document.getElementById('studentDetails');
+            detailsDiv.innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Contact:</strong> ${contact}</p>
+            `;
+        }
+
+        window.onload = displayStudentDetails;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url(page6.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard-container {
+            background: rgba(250, 250, 250, 0.516);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(208, 115, 115, 0.2);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #000305;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin: 20px 0;
+        }
+
+        .profile-info {
+            background: rgba(236, 240, 241, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: left;
+            color: #34495e;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            width: 100%;
+            background-color: #2980b9;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        /* Search Results */
+        .search-results p {
+            background-color: #ed070e;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .search-results p:hover {
+            background-color: #ef031b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <h1>Student Dashboard</h1>
+
+        <h2>Your Profile</h2>
+        <div id="profile" class="profile-info"></div>
+
+        <h2>Search for Other Students</h2>
+        <input type="text" id="searchInput" placeholder="Search by name, department, or year">
+        <button onclick="searchStudents()">Search</button>
+        <div id="searchResults" class="search-results"></div>
+
+        <button onclick="window.location.href='faculty.html'">View Faculty Advisors</button>
+    </div>
+
+    <script>
+        const studentProfile = {
+            name: 'John Doe',
+            email: 'johndoe@example.com',
+            contact: '+1234567890',
+            courses: 'Computer Science, Mathematics',
+            grades: 'A, B+',
+            attendance: '95%'
+        };
+
+        const studentsDatabase = [
+            { name: 'Alice Smith', department: 'Computer Science', year: '2022' },
+            { name: 'Bob Johnson', department: 'Mathematics', year: '2023' },
+            { name: 'Carol Williams', department: 'Physics', year: '2022' },
+        ];
+
+        function displayProfile() {
+            const profileDiv = document.getElementById('profile');
+            profileDiv.innerHTML = `
+                <p><strong>Name:</strong> ${studentProfile.name}</p>
+                <p><strong>Email:</strong> ${studentProfile.email}</p>
+                <p><strong>Contact:</strong> ${studentProfile.contact}</p>
+                <p><strong>Courses:</strong> ${studentProfile.courses}</p>
+                <p><strong>Grades:</strong> ${studentProfile.grades}</p>
+                <p><strong>Attendance:</strong> ${studentProfile.attendance}</p>
+            `;
+        }
+
+        function searchStudents() {
+            const input = document.getElementById('searchInput').value.trim();
+            if (input) {
+                // Redirect to search-results.html with the query parameter
+                window.location.href = `search-results.html?query=${encodeURIComponent(input)}`;
+            }
+        }
+
+        window.onload = function() {
+            displayProfile();
+        };
+    </script>
+</body>
+
+</html>

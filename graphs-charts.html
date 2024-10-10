@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Directory Application - Graphs and Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url(page15.png); /* Add your image path here */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            color: #333;
+            line-height: 1.6;
+            display: flex; /* Use flexbox to align content */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center align items */
+        }
+
+        .container {
+            max-width: 1000px; /* Wider container for side-by-side layout */
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0); /* Semi-transparent white */
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex; /* Flexbox for the chart containers */
+            justify-content: center; /* Center the charts */
+            gap: 20px; /* Gap between charts */
+        }
+
+        h1 {
+            color: #1d3557;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%; /* Full width for title */
+        }
+
+        /* Individual Chart Container Styling */
+        .chart-container {
+            flex: 1; /* Allow each chart container to grow equally */
+            max-width: 480px; /* Maximum width for the chart container */
+            margin: 10px; /* Margin for spacing between charts */
+            padding: 20px;
+            background-color: #f1f3f5;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            max-width: 100%; /* Ensure charts fit within their containers */
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* Light background for canvas */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            width: 100%; /* Full width for button container */
+            margin-top: 30px; /* Add margin above buttons */
+            align-items: center; /* Center align buttons */
+        }
+
+        button {
+            display: block;
+            padding: 8px 16px; /* Smaller padding */
+            margin-top: 10px; /* Adjust margin for spacing */
+            background-color: #1d3557; /* Main button color */
+            color: white;
+            border: none;
+            border-radius: 25px; /* More rounded corners */
+            cursor: pointer;
+            font-size: 14px; /* Smaller font size */
+            transition: background-color 0.3s, transform 0.2s; /* Add a transform for hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        button:hover {
+            background-color: #457b9d; /* Change on hover */
+            transform: scale(1.05); /* Slightly enlarge the button on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>College Directory Application - Graphs and Charts</h1>
+    <div class="container">
+        <div class="chart-container">
+            <canvas id="barChart"></canvas> <!-- Canvas for Bar Chart -->
+        </div>
+        <div class="chart-container">
+            <canvas id="pieChart"></canvas> <!-- Canvas for Pie Chart -->
+        </div>
+    </div>
+    
+    <div class="button-container">
+        <button onclick="window.history.back()">Back to Dashboard</button>
+    </div>
+
+    <script>
+        // Bar Chart Data and Configuration
+        const barCtx = document.getElementById('barChart').getContext('2d');
+
+        // Function to create gradient colors for bars
+        function getGradient(ctx, index) {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, `rgba(29, 53, 87, 0.8)`);
+            gradient.addColorStop(1, `rgba(29, 53, 87, 0.5)`);
+            return gradient;
+        }
+
+        const barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Computer Science', 'Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering', 'Business Administration'],
+                datasets: [{
+                    label: 'Number of Students',
+                    data: [120, 90, 110, 80, 100],
+                    backgroundColor: [
+                        getGradient(barCtx, 0),
+                        getGradient(barCtx, 1),
+                        getGradient(barCtx, 2),
+                        getGradient(barCtx, 3),
+                        getGradient(barCtx, 4)
+                    ],
+                    borderColor: [
+                        'rgba(29, 53, 87, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Allows to control height
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Students'
+                        },
+                        ticks: {
+                            color: '#1d3557', // Custom tick color
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#1d3557', // Custom tick color
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#1d3557' // Custom legend label color
+                        }
+                    }
+                }
+            }
+        });
+
+        // Pie Chart Data and Configuration
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Undergraduate', 'Graduate', 'Doctorate'],
+                datasets: [{
+                    label: 'Student Distribution',
+                    data: [300, 150, 50],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)', // Red
+                        'rgba(54, 162, 235, 0.8)', // Blue
+                        'rgba(255, 206, 86, 0.8)' // Yellow
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: '#1d3557' // Custom legend label color
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
